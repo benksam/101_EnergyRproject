@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1552148048315.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "ECFF2008",
+    "lastKnownWriteTime" : 1549720338,
+    "last_content_update" : 1549720338,
+    "path" : "C:/101_EnergyRproject/4_RScripts/0_DefaultRScripts/Data Wrangling in R/Ch03/03_07/excel_complete.r",
+    "project_path" : "4_RScripts/0_DefaultRScripts/Data Wrangling in R/Ch03/03_07/excel_complete.r",
+    "properties" : {
+        "cursorPosition" : "16,18",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

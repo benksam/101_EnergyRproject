@@ -1,0 +1,84 @@
+---
+title: "Job Research Report for Septemper 2019"
+output: html_notebook
+---
+
+
+
+
+
+### Job Research Activities 
+
+-----
+
+
+
+> **My job research activities have to be placed under the context of the many degrees that I acquired during my university studies, my professional experiences as a teacher among others and the career path I wish to undertake for the near future**. 
+
+
+
+
+## Priority 1: Web developer: Designing interactive Webapplications for education purposes {.tabset}  
+
+
+
+> Given the recent experiences in Denmark while teaching the topics I feel most comfortable with i.e. French and Geography but mostly some unfortunate frictions between me and that school's leadership as well as a few colleagues, I consider that a career path change may be legitimate given my recent studies in economics, my interest in statistical tools and the recent experience I built up in coding web applications used in teaching Geography    
+
+
+
+Yet developing interactive webapplications to be consumed by students would also require additional skills beyond coding in R, the statistical programming language I am familiar with.
+
+
+Certainly, Webapplications can be hosted by 3. parties, but for the sake of much more flexibility and for economic reasons, self-hosted solutions makes more sense in my opinion. But this requires knowledge of:
+
+
+
+>
+- The Linux OS and command line tools (Bash) as well as general administrative computer skills,
+- Version control tools such as Git for code storage, sharing and automating (CI/CD flows)
+- The containarisation of microservices, in particular tools such as Docker and Kubernetes, where different components of webapplications are made to function in clusters
+- Many related concepts/technologies working for the same goal of deploying final webapplications to be consumed by students, among others, networking and loadbalancing, storage and log monitoring, security issues, etc.
+- And further mastering of programming skills of Shiny Apps, Rmarkdown documents, Yaml files or the like.  
+
+
+
+Given the many job possibilities in Web-development with skills in relatively new technologies such as Kubernetes and optimal CI/CD pipelines or the like, I consider this priority an opportune one. 
+
+
+-----
+
+
+## Priority 2: Teaching French, Maths, Geography or basic IT/programming skills.
+
+
+
+> As a parallel undertaking, searching for teacher jobs with subjects such as French, Maths and Geography was done, but such job positions come rarerely as full-time positions, which is why the 1st priority was laid down. In spite of this, I am open to take any teacher job in line with my competencies for the whole region of Skåne if needed, although I would expand my horizon and be ready to move anywhere in Sweden for a webdeveloper job. 
+
+
+-----
+
+
+## Priority 3: Economics as social science.
+
+
+
+> A third option is to consider jobs such as research assistants in economics or dataanalysist at universities. Realistically, my age and lack of relevant experience is at odd with getting success in finding such kind of jobs. But once again, I would actually prefer to work in the field of dataanalysis since closer to my interests (statistical programming and visualizations) but my efforts so far have been to get myself ready for a webdeveloper position or a teacher position in the topics that I am competent in 
+
+ 
+
+-----
+
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.

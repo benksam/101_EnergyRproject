@@ -1,0 +1,10 @@
+{
+    "dialog-state" : {
+        "caseSensitive" : false,
+        "filePatterns" : [
+        ],
+        "path" : "C:/101_EnergyRproject",
+        "query" : "Skole",
+        "regex" : false
+    }
+}

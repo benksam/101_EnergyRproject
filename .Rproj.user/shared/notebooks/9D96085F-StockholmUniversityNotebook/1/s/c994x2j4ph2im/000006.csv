@@ -1,0 +1,4 @@
+"0","tankLevel <- data.frame(c(0, 50, 150, 275, 350, 425, 540, 680, 700, 750),"
+"0","                    c(15, 14, 12, 9.5, 8, 6.5, 4.2, 1.4, 1, 0))"
+"0","colnames(tankLevel) <- c(""Distance Travelled (km)"",""Gazoline Level (Quantity)"")"
+"0","tankLevel"

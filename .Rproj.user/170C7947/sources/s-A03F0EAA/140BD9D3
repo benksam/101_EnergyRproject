@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1552158102791.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "140BD9D3",
+    "lastKnownWriteTime" : 1550337023,
+    "last_content_update" : 1550337023,
+    "path" : "C:/101_EnergyRproject/4_RScripts/0_DefaultRScripts/BridgingTest3.R",
+    "project_path" : "4_RScripts/0_DefaultRScripts/BridgingTest3.R",
+    "properties" : {
+        "cursorPosition" : "184,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

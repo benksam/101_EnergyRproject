@@ -1,0 +1,471 @@
+
+# Pre, Crisis and Post ALL in 1 file for AFM (Complete datasæt)
+
+
+library(FactoMineR)
+library(ggplot2)
+library("factoextra")
+library("dplyr")
+library(ggrepel)
+
+library(reshape2)
+library(psych)
+
+library(missMDA)
+
+library(gridExtra)
+
+
+#######
+
+AFM<- read.csv("FULL_AFM_COPY.csv", header = T)
+str(AFM)
+names(AFM)
+
+
+# Split for neat rearrangement of delperiod for AFM
+# Averages
+
+AFM_AV = AFM[,c(1,grep("AV", colnames(AFM)))]
+str(AFM_AV)
+
+# Pre-crisis
+
+AFM_Pre = AFM[,c(1,grep("Pre", colnames(AFM)))]
+str(AFM_Pre)
+
+# Post-crisis
+
+AFM_Post = AFM[,c(1,grep("Post", colnames(AFM)))]
+str(AFM_Post)
+
+
+# Crisis
+
+AFM_Crisis = AFM[,c(1,grep("Crisis", colnames(AFM)))]
+str(AFM_Crisis)
+
+
+write.csv(AFM_Pre,"AFM_Pre.csv")
+write.csv(AFM_Crisis,"AFM_Crisis.csv")
+write.csv(AFM_Post,"AFM_Post.csv")
+write.csv(AFM_AV,"AFM_AV.csv")
+
+
+
+
+data_Pre = cbind(data_Pre, data_Av)
+names(data_Pre)
+
+duplicated(data_Pre[,-c(1,11)])
+data_Pre = data_Pre[!duplicated(data_Pre[,-c(1,11)]), ]
+
+write.csv(data_Pre,"Labor_Stat_Pre.csv")
+
+
+# crisis
+
+data_Cris = merge4[,c(1,grep("Cris", colnames(merge4)))]
+str(data_Cris)
+
+data_Cris= cbind(data_Cris, data_Av)
+names(data_Cris)
+
+duplicated(data_Cris[,-c(1,21)])
+data_Cris = data_Cris[!duplicated(data_Cris[,-c(1,21)]), ]
+
+
+write.csv(data_Cris,"Labor_Stat_Crisis.csv")
+
+
+# Post-crisis
+
+data_Post = merge4[,c(1,grep("Post", colnames(merge4)))]
+str(data_Post)
+
+data_Post = cbind(data_Post, data_Av)
+names(data_Post)
+
+duplicated(data_Post[,-c(1,21)])
+data_Post = data_Post[!duplicated(data_Post[,-c(1,21)]), ]
+
+write.csv(data_Post,"Labor_Stat_Post.csv")
+
+
+
+##############################
+# DATA MANIPULATION DONE!
+
+
+AFM<- read.csv("FULL_AFM_NEAt.csv", header = T, row.names = 1)
+str(AFM)
+names(AFM)
+
+
+#################################################################
+# Supporting interpretation of Partial Points
+# For selection of individuals (DK, Berlin and LUX from same CLuster)
+
+# 7, 24, 41 - SAL
+# 8, 25, 42 - SELF
+
+
+# row.names(AFM) - 17 - 21 and 3 and 63
+
+AFM[c(17:21,3,63),c(7, 24, 41, 8, 25, 42)]
+write.csv(AFM[c(17:21,3,63),c(7, 24, 41, 8, 25, 42)],"Prof_AFM_sample.csv")
+
+describe(AFM)[c(7, 24, 41, 8, 25, 42),] # for extracting EU-Region MEANS (Table bottom line)
+
+
+#######################################
+# SUPPLEMENT (Missing initially for Tables)
+# 20-64 UNEMP
+AFM[c(17:21,3,63),c(9, 26, 43)]
+write.csv(AFM[c(17:21,3,63),c(9, 26, 43)],"Unemp_Adult_AFM_sample.csv")
+
+describe(AFM)[c(9, 26, 43),]
+
+
+# 
+# 20-64 UNEMP
+AFM[c(17:21,3,63),c(15, 32, 49)]
+write.csv(AFM[c(17:21,3,63),c(15, 32, 49)],"EMP_Yound_EDO_AFM_sample.csv")
+
+describe(AFM)[c(15, 32, 49),]
+#############################################################
+
+# 11, 28, 45 - EMP young
+# 10, 27, 44 - UNEMP young
+
+# 3, 20, 37 - LTU NE
+
+AFM[c(17:21,3,63),c(10, 27, 44, 11, 28, 45, 3, 20, 37)]
+write.csv(AFM[c(17:21,3,63),c(10, 27, 44, 11, 28, 45, 3, 20, 37)],"Unemp_AFM_sample.csv")
+
+describe(AFM)[c(10, 27, 44, 11, 28, 45, 3, 20, 37),]
+
+# 4, 21, 38 - EMP ED0
+# 17, 34, 51 - EMP ED0 25_64
+
+AFM[c(17:21,3,63),c(4, 21, 38, 17, 34, 51)]
+write.csv(AFM[c(17:21,3,63),c(4, 21, 38, 17, 34, 51)],"EmpED0_AFM_sample.csv")
+
+describe(AFM)[c(4, 21, 38, 17, 34, 51),]
+
+# 5, 22, 39 - EMP ED3
+# 16, 33, 50 - EMP ED3 young
+# 18, 35, 52 - EMP ED3 Adult
+
+AFM[c(17:21,3,63),c(5, 22, 39,18, 35, 52,16, 33, 50)]
+write.csv(AFM[c(17:21,3,63),c(5, 22, 39,18, 35, 52,16, 33, 50)],"EmpED3_AFM_sample.csv")
+
+
+describe(AFM)[c(5, 22, 39,18, 35, 52,16, 33, 50),]
+
+# 6, 23, 40 - EMP ED5
+
+AFM[c(17:21,3,63),c(6,23,40)]
+write.csv(AFM[c(17:21,3,63),c(6,23,40)],"EmpED5_AFM_sample.csv")
+
+describe(AFM)[c(6,23,40),]
+
+
+# 53, 54, 58, 59, 63, 64 - GVA EMP/SAL
+
+AFM[c(17:21,3,63),c(53, 58, 63, 54, 59, 64)]
+write.csv(AFM[c(17:21,3,63),c(53, 58, 63, 54, 59, 64)],"GVA_EMP_AFM_sample.csv")
+
+describe(AFM)[c(53, 58, 63, 54, 59, 64),]
+
+summary(AFM)
+describe(AFM)
+
+#######################
+##### AFM and CAH  # (Hierarchical Classification with AFM not tried yet!!!)
+#######################
+
+
+library(FactoMineR)
+
+res <- MFA(AFM, group=c(1,17,17,17,5,5,5,3), type=c("n",rep("s",7)),
+           ncp=4, name.group=c("Area","Pre","Crisis","Post","Presup","Crisup","Posup","AV"),
+           num.group.sup=c(1,5:8))
+
+# Résumé des résultats
+summary(res)
+
+
+# Description des dimensions
+dimdesc(res)
+dimdesc(res, c(4))
+
+
+names(AFM)
+
+
+# For correlation strenghs (OUTPUT Tables) of productivity with labour statistics
+
+condes(AFM, num.var=53) # Description de GVA_EMP_Pre par autres variables (cor/eta2)
+condes(AFM, num.var=54) # Description de GVA_SAL_Pre par autres variables (cor/eta2)
+
+condes(AFM, num.var=63) # Description de GVA_EMP_Post par autres variables (cor/eta2)
+condes(AFM, num.var=64) # Description de GVA_SAL_Post par autres variables (cor/eta2)
+
+
+condes(AFM, num.var=58) # Description de GVA_EMP_Crisis par autres variables (cor/eta2)
+condes(AFM, num.var=59) # Description de GVA_SAL_Crisis par autres variables (cor/eta2)
+
+
+x11()
+round(res$eig,2)
+barplot(res$eig[,2], main = "Eigenvalues",
+        names.arg = paste("Dim",1:nrow(res$eig), sep=""))
+abline(h=100/51)
+
+
+# Graphe des individus et des modalités
+plot(res)
+plot(res, invisible="quali")
+plot(res, invisible="quali", cex=0.8)
+x11()
+plot(res, invisible="quali", cex=0.8, partial="all")
+plot(res, invisible="quali", cex=0.8, partial=c("DK01","DK02","DK03","DK04","DK05"))
+
+# Graphe des individus avec sélection
+plot(res, invisible="quali", cex=0.8, partial=c("DK01","DK02","DK03","DK04","DK05"), select="contrib 10")
+plot(res, invisible="quali", cex=0.8, partial=c("DK01","DK02","DK03","DK04","DK05"), 
+     select=c("DK01","DK02","DK03","DK04","DK05"), axes = 3:4)
+x11()
+a = plot(res, invisible="quali", cex=0.8, partial=c("DK01","DK02","DK03","DK04","DK05","DE1","DE2","DE3","DEB","LU00","ES30"), 
+     select=c("DK01","DK02","DK03","DK04","DK05","DE1","DE2","DE3","DEB","LU00","ES30"), autoLab = "y", shadow = T, xlim=c(-3,1), ylim=c(-2.5,1))
+
+
+x11()
+b = plot(res, invisible="quali", cex=0.8, partial=c("DK01","DK02","DK03","DK04","DK05","DE3","DEB","LU00","ES30"), 
+     select=c("DK01","DK02","DK03","DK04","DK05","DE3","DEB","LU00","ES30"), autoLab = "y", shadow = T, xlim=c(-3,1), ylim=c(-2.5,1), axes = 3:4)
+
+x11()
+grid.arrange(a, b,  nrow = 2)
+
+
+
+plot(res, invisible="quali", partial="all", palette=palette(c("black","transparent","transparent","blue")))
+
+
+
+head(data)
+plot(res, invisible="quali", cex=0.8, partial=c("DK01","DK02","DK03","DK04","DK05"))
+plot(res, invisible="quali", partial=c("DK01","DK02","DK03","DK04","DK05"), unselect=0, axes = 3:4)
+
+
+
+plot.MFA(res,choix="ind", partial = "all", invisible="ind")
+plot.MFA(res,choix="ind", partial = "all", invisible="ind", axes = 3:4, xlim=c(-2.5,2.5),ylim=c(-0.5,1.5))
+
+plot.MFA(res,choix="group", partial = "all")
+plot.MFA(res,choix="group", partial = "all", axes = 3:4)
+
+
+
+
+plot(res, invisible="quali", habillage=1, cex=0.8, select="cos2 0.4")
+plot(res, invisible="quali", habillage=1, cex=0.8, select="cos2 0.4")
+plot(res, invisible="quali", habillage=1, cex=0.8, select="contrib 5")
+plot(res, invisible="quali", habillage=1, cex=0.8, select="contrib 5", unselect=0)
+plot(res, invisible="quali", habillage=1, cex=0.8, select="contrib 5", unselect=1)
+plot(res, invisible="quali", habillage=1, cex=0.8, select="contrib 15", unselect=0, axes = 3:4)
+plot(res, invisible="quali", habillage=1, cex=0.8, select="contrib 5", unselect="grey70")
+plot(res, invisible="quali", habillage=1, cex=0.8, select="contrib 35", unselect="grey70", axes=3:4)
+
+x11()
+plot(res, invisible="quali", habillage=1, cex=0.8, select=c("DK01","DK02","DK03","DK04","DK05"), unselect="grey70", axes=3:4)
+
+# Graphe des variables
+plot(res, choix="var")
+plot(res, choix="var", shadow=TRUE)
+plot(res, choix="var", shadow=TRUE, select="contrib 30", cex=0.8, autoLab = "y")
+plot(res, choix="var", shadow=TRUE, select="contrib 15", cex=0.8, autoLab = "y", axes=3:4)
+
+
+
+
+x11()
+plot(res,choix="var", invisible="quanti.sup", title="Graphe des variables actives") 
+
+
+selection = grep("Pre",rownames(res$quanti.var$coord),fixed=TRUE)
+plot(res,choix="var",select=selection,invisible="quanti.sup", cex=0.8, autoLab = "y")
+
+selection = grep("AV",rownames(res$quanti.var.sup$coord),fixed=TRUE)
+plot(res,choix="var",select=selection)
+
+plot(res, choix="axes")
+plot(res, choix="axes", axes = 3:4)
+
+
+
+# # Graphe des axes partiels
+# res <- MFA(wine, group=c(2,5,3,10,9,2), type=c("n",rep("s",5)),
+#            ncp=3, name.group=c("orig","olf","vis","olfag","gust","ens"),
+#            num.group.sup=c(1,6))
+# plot(res, choix="axes")
+
+
+
+# Supplements
+
+
+
+x11()
+plot.MFA(res)
+plot.MFA(res,choix="var")
+plot.MFA(res,choix="ind")
+
+plot.MFA(res,choix="axes", axes = 3:4)
+
+
+
+plot.MFA(res,choix="ind", partial = "all")
+
+
+
+# plot.MFA(res, choix="ind", partial = c("Pampryl amb.","Pampryl fr."), lab.par=T)
+
+# x11()
+# plot.MFA(ResAFM,choix="ind", partial = "all")
+# text(ResAFM$ind$coord.partiel[,1], ResAFM$ind$coord.partiel[,2], rep(c("Chim","senso"),6), pos=3, cex = 0.5, offset=0.5)  
+
+
+# Etalement des individues partiels - Supports of partial points / categories graph
+# SI besoin - tres UTILE pour INTERPRETATION des differences entre GROUPEs 
+# INTRA decomposer par INDIVIDUS!!!
+res$ind$within.inertia
+
+tab_within.inertia1<-res$ind$within.inertia[order(-res$ind$within.inertia[,1]),]   # 7
+tab_within.inertia2<-res$ind$within.inertia[order(-res$ind$within.inertia[,2]),]   # 8
+tab_within.inertia3<-res$ind$within.inertia[order(-res$ind$within.inertia[,3]),]  # 9
+tab_within.inertia4<-res$ind$within.inertia[order(-res$ind$within.inertia[,4]),]  # 10
+tab_within.inertia5<-res$ind$within.inertia[order(-res$ind$within.inertia[,5]),]  # 11
+
+
+tab_within.inertia1[1:20,] # +151, 159, 169, 210, 173, 157, 185, 230, 101, 359 / -217, 175, 259, 270
+tab_within.inertia2[1:20,]# +151, 161, 153, 269, 250 / -147, 185, 201, 270
+tab_within.inertia3[1:20,]# +187, 151, 210, 157 / -190, 161
+tab_within.inertia4[1:20,] # +187, 173, 260, 157, 201, 250, 240 / -165, 147
+tab_within.inertia5[1:20,]# +151, 101, 259, 219, 159, 165, 169 / - 190
+
+
+# rapport intertie inter/total
+res$inertia.ratio
+
+res$group$correlation
+
+round(res$partial.axes$cor.between,3)
+
+
+# coefficient de correlation / carre de correlation
+res$group$coord
+
+# Qualite de representations des groupes (inertie groupe/inertie totale)
+res$group$cos2
+
+# Liaison entres groupes et DIMENSIONALITE 
+res$group$Lg
+sort(diag(res$group$Lg), decreasing = T)
+
+
+# Liaison entres groupes NORMEE
+res$group$RV
+
+RV = res$group$RV
+
+RV[lower.tri(RV)] <- 0
+RV[lower.tri(RV,diag=TRUE)] <- 0
+
+RV <- as.data.frame(as.table(RV))
+high<-subset(RV, abs(Freq) > 0.5)
+high[order(-high[,3]),]
+
+
+
+# dimensionalite (Lg)???
+res$group$dist2
+
+?plot.MFA
+
+res$separate.analyses$Pre$eig[1:4,]
+res$separate.analyses$Crisis$eig[1:4,]
+res$separate.analyses$Post$eig[1:4,]
+
+# options(scipen=3)
+# res$partial.axes
+
+
+
+############
+# CAH - USEFUL Clustering analysis!!!
+############
+
+
+
+# res.hcpc <- HCPC(res, graph=T)
+res.hcpc <- HCPC(res, kk = Inf, graph=T)
+names(res.hcpc )
+x11()
+plot(res.hcpc, axes=1:2)
+
+HCPC(res)   # Results for the Hierarchical Clustering on Principal Components**
+res.hcpc$call        # **Results for the Principal Component Analysis (PCA)**
+res.hcpc$call$t$tree # BASICS for the HCPC **
+
+res$eig
+head(round(res$eig[,1],3))
+head(round(res.hcpc$call$t$inert.gain,3))
+
+# catdes(temp.eu,num.var=17) # Description de la variable categorielle de PCA**
+
+
+catdes(data_red[-c(hoved,96),c(1:2,3:17)], num.var=1)
+
+
+res.hcpc
+res.hcpc$call
+res.hcpc$desc.var  # Description des classes de HCPC**  / res.hcpc$desc.var$test.chi2 
+res.hcpc$desc.var$category
+res.hcpc$desc.var$quanti.var
+res.hcpc$desc.var$quanti 
+
+res.hcpc$desc.axe    # Description des classes par Facteurs Principaux**
+
+
+x11()
+plot(res.hcpc, axes=c(1,2), choice="map", draw.tree=F, ind.names = T, centers.plot=FALSE)
+x11()
+plot(res.hcpc, axes=c(1,3), choice="map", draw.tree=F, ind.names = T, centers.plot=FALSE)
+x11()
+plot(res.hcpc, axes=c(1,4), choice="map", draw.tree=F, ind.names = T, centers.plot=FALSE)
+x11()
+plot(res.hcpc, axes=c(1,5), choice="map", draw.tree=F, ind.names = T, centers.plot=T, rect = F, autoLab="yes")
+
+?plot.PCA
+
+x11()
+plot(res.hcpc, axes=c(2,3), choice="map", draw.tree=F, ind.names = T, centers.plot=FALSE)
+x11()
+plot(res.hcpc, axes=c(2,4), choice="map", draw.tree=F, ind.names = T, centers.plot=FALSE)
+x11()
+plot(res.hcpc, axes=c(3,4), choice="map", draw.tree=F, ind.names = T, centers.plot=FALSE)
+
+?fviz_cluster
+
+
+x11()
+fviz_cluster(res.hcpc, ggtheme = theme_bw(), geom = c("text"), repel = T)
+
+
+res.hcpc$desc.ind
+
+
+
+

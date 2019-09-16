@@ -1,0 +1,28 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1568135927471.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1CF4449A",
+    "lastKnownWriteTime" : 1568559350,
+    "last_content_update" : 1568559350126,
+    "path" : "C:/101_EnergyRproject/4_RScripts/EnergyNotebook.Rmd",
+    "project_path" : "4_RScripts/EnergyNotebook.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "295,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1",
+        "working_dir" : "current"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

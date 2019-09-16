@@ -1,0 +1,117 @@
+---
+author: "Samir Benjelloun"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+params:
+  region:
+    label: "Region:"
+    value: South
+    input: select
+    choices: [South Asia, Sub-Saharan Africa, Europe & Central Asia, Middle East & North Africa, Latin America & Caribbean, East Asia & Pacific, North America]
+  printcode: TRUE
+  emissions:
+    label: "CO2-emissions"
+    value: [0, 50]
+    input: slider
+    min: 0
+    max: 50
+    step: 5
+    sep: ""
+output:
+  html_document:
+    df_print: paged
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 4
+    code_download: TRUE
+  word_document: default
+  pdf_document: default
+---
+
+
+```{r options, echo = FALSE, results = "hide"}
+## Hide code if we're not rendering the report for a quantitative audience.
+if(!params$printcode)knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+```
+
+
+
+# Report for **`r params$region`**
+
+*** 
+
+> CO2-emissions ranging between **`r params$emissions[1]`** and **`r params$emissions[2]`**
+
+## Sustainable Energy Consumption 
+
+Now that the idea of relationship, or *correlation*, has been introduced, let's shift back to the analysis considered at the beginning of the document. Among the questions that the analysis will try to answer, here are a few ones:
+
+
+* Do average income, energy consumption and CO2-emissions of the countries of the world relate to each other?
+
+* Do these different patterns of relationship also hold for other income-, energy- and CO2-emissions-related variables? 
+
+* Given a region or income level, how (dis)similar are countries in terms of Energy Consumption and CO2-emissions? 
+
+
+## Libraries
+
+The analysis will be carried out in R and requires the use of the following packages (a collection of many functions):
+
+```{r libraries, comment=FALSE, results='hide', message=FALSE}
+library(tidyverse)
+```
+
+## The data
+
+To start, let's read the available data on Income, Energy Consumption and CO2-emissions. 
+
+```{r data}
+Energy_comp = read.csv("3_TidyData/EnergyCompleted_Final.csv",
+                       header=TRUE,sep=",", dec=".", 
+                       row.names = 1)
+dim(Energy_comp)
+```
+
+
+As can be seen, the data consists of 147 countries of the world, the different regions/categories they belong to and the 3 afore-mentioned variable groups with 18 columns in total. 
+
+Let's have a preview of the dataset:
+
+## Data preview
+
+```{r head}
+head(Energy_comp, 10)
+```
+
+
+## Data Summary
+
+A summary of the dataset follows:
+
+```{r summary}
+print(summary(Energy_comp))
+```
+
+### Note 1
+
+**PS1**: the existence of missing values for some variables was dealt with imputation methods from the package *missMDA*. Suffice to write here that the original dataset was trimmed of some countries that lack many values, while at the same time, 37 countries were kept for the analysis by imputing some of their missing values using the correlation structure of the dataset. 
+
+### Note 2
+
+**PS2**: Refer to this [App](https://arcg.is/uW4Ky) to compare the analysis with complete observations (110) and the one based on the augmented dataset (the current one) with imputed observations (147).  
+
+***
+
+## Data for **`r params$region`**
+
+```{r selected_region}
+Energy_comp %>%  filter(Region==params$region)
+```
+
+
+## Data for **`r params$region`** and emission-range [**`r params$emissions[1]`**, **`r params$emissions[2]`**]
+
+```{r selected_emissions}
+Energy_comp %>%  filter(Region==params$region) %>%  filter(CO2.emissions..tons.per.capita.>=params$emissions[1] & CO2.emissions..tons.per.capita.<=params$emissions[2])
+```
+

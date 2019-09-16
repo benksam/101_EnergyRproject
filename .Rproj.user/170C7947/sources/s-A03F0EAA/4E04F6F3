@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1568613259531.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4E04F6F3",
+    "lastKnownWriteTime" : 1568613377,
+    "last_content_update" : 1568613377643,
+    "path" : "C:/101_EnergyRproject/Energy_Param03.Rmd",
+    "project_path" : "Energy_Param03.Rmd",
+    "properties" : {
+        "cursorPosition" : "110,0",
+        "scrollLine" : "101",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

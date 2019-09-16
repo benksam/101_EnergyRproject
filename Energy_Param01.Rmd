@@ -1,0 +1,197 @@
+---
+author: "Samir Benjelloun"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+params:
+  region:
+    label: "Region:"
+    value: South
+    input: select
+    choices: [South Asia, Sub-Saharan Africa, Europe & Central Asia, Middle East & North Africa, Latin America & Caribbean, East Asia & Pacific, North America]
+  printcode: TRUE
+  emissions:
+    label: "CO2-emissions"
+    value: [0, 50]
+    input: slider
+    min: 0
+    max: 50
+    step: 5
+    sep: ""
+output:
+  html_document:
+    df_print: paged
+    toc: TRUE
+    toc_float: TRUE
+    toc_depth: 4
+    code_download: TRUE
+  word_document: default
+  pdf_document: default
+---
+
+
+```{r options, echo = FALSE, results = "hide"}
+## Hide code if we're not rendering the report for a quantitative audience.
+if(!params$printcode)knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+```
+
+
+
+***
+
+# Report for *`r params$region`* and CO2-emissions between **`r params$emissions[1]`** and **`r params$emissions[2]`**
+
+## Sustainable Energy Consumption 
+
+Now that the idea of relationship, or *correlation*, has been introduced, let's shift back to the analysis considered at the beginning of the document. Among the questions that the analysis will try to answer, here are a few ones:
+
+
+* Do average income, energy consumption and CO2-emissions of the countries of the world relate to each other?
+
+* Do these different patterns of relationship also hold for other income-, energy- and CO2-emissions-related variables? 
+
+* Given a region or income level, how (dis)similar are countries in terms of Energy Consumption and CO2-emissions? 
+
+
+The analysis will be carried out in R and requires the use of the following packages (a collection of many functions):
+
+```{r libraries, comment=FALSE, results='hide', message=FALSE}
+library(tidyverse)
+library(PerformanceAnalytics)
+library(gdata)
+library(FactoMineR)
+library(missMDA)
+library(sp)
+# library(arcgisbinding)
+```
+
+To start, let's read the available data on Income, Energy Consumption and CO2-emissions. 
+
+```{r data}
+Energy_comp = read.csv("3_TidyData/EnergyCompleted_Final.csv",
+                       header=TRUE,sep=",", dec=".", 
+                       row.names = 1)
+dim(Energy_comp)
+```
+
+
+As can be seen, the data consists of 147 countries of the world, the different regions/categories they belong to and the 3 afore-mentioned variable groups with 18 columns in total. 
+
+Let's have a preview of the dataset:
+
+```{r head}
+head(Energy_comp, 10)
+```
+
+
+A summary of the dataset follows:
+
+```{r summary}
+print(summary(Energy_comp))
+```
+
+
+**PS**: the existence of missing values for some variables was dealt with imputation methods from the package *missMDA*. Suffice to write here that the original dataset was trimmed of some countries that lack many values, while at the same time, 37 countries were kept for the analysis by imputing some of their missing values using the correlation structure of the dataset. Refer to this [App](https://arcg.is/uW4Ky) to compare the analysis with complete observations (110) and the one based on the augmented dataset (the current one) with imputed observations (147).  
+
+***
+
+
+
+## Simple correlations from the lecture's dataset
+
+With this dataset, one can visualize the few correlations introduced in the [Google Sheets Document](https://docs.google.com/spreadsheets/d/1NZpys5yniDyOuUPxV7JKWkcTP-FUZL1esZSvUitZPd0/edit?usp=sharing). This is done with the package *PerformanceAnalytics* as follows.
+
+```{r reduced_correlation}
+chart.Correlation(Energy_comp[,c(6,15,17)], histogram=TRUE, pch=19)
+```
+
+Focusing first on the scatterplots, the graphical matrix could be read as one read for example a multiplication table, that is reading the rows first and then the columns: There, were the row belonging to *Energy Use per Capita* meets the column of *GDP per Capita*, the scatter-plot suggests a rather pronounced correlation between these 2 variables, although the correlation between *Energy Use per Capita* and *CO2 Emissions per Capita* appears to be slightly more significant. Not surprisingly given the well-known fact that fossile fuels still account for about 80 pct. of total energy consumed on the global level, far ahead of the share of renewable energy sources (around 10 pct.) as discussed during the lectures.   
+
+The 3 scatterplots can be drawn once more, this time visualizing the income groups each country (point) pertains to:
+
+```{r selected_correlation}
+lower.panel<-function(x, y){
+  points(x,y, pch=19, col=c("red", "green", "blue", "grey")[Energy_comp$Income.Group])
+  r <- round(cor(x, y), digits=2)
+  txt <- paste0("R = ", r)
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  text(0.5, 0.9, txt)
+}
+pairs(Energy_comp[,c(6,15,17)], upper.panel = NULL, 
+      lower.panel = lower.panel)
+```
+**PS**: The colour conventions are:
+
+* **Red** for *high income* countries
+* **Green** for *low income* countries
+* **Blue** for *lower middle income* countries
+* **Grey** for *upper middle income* countries
+
+***
+
+
+
+## Extended Correlation Structure
+
+In the same fashion, one can expand the correlation matrix to include the remainder of the continuous variables at hand:
+
+```{r full_correlation}
+chart.Correlation(Energy_comp[,c(5:18)], histogram=TRUE, pch=19)
+```
+
+Given the difficulty to distinguish between the details in such a graphical illustration, one can list the strongest correlations among all variables. This have been carried out in the next code chunk. In passing, note that the strongest relationships in the matrix are suggested by the number of red stars (3 means likelier relationships) or the numerical value of the correlation coefficient (stronger correlations where the coefficient is closer to 1 in absolute terms). Any biasing effects from outliers have been ignored.  
+
+```{r ordered_correlation}
+corm <- cor(Energy_comp[,c(5:18)])
+corm[lower.tri(corm)] <- 0
+corm[lower.tri(corm,diag=TRUE)] <- 0
+cor <- as.data.frame(as.table(corm))
+high<-subset(cor, abs(Freq) > 0.6)
+as.matrix(high[order(-high[,3]),])
+
+```
+
+The correlation coefficients are arranged in descending order, and the ones of interest are those that are closest to 1 in absolute values. 
+
+Hence, there seems to be further relevant correlations among the variables from the extended dataset. To name a few ...
+
+
+* On the positive side:
+    
+    + Total income and total CO2-emissions, 
+    
+    + Electricity Consumption and Energy Use per capita,
+
+* On the negative side:
+    
+    + Electricity production from fossile fuels and from hydroelectric sources
+    
+    + Electricity production from fossile fuels and from alternative and nuclear energy
+
+ 
+This seems in line with general intuition and corroborates earlier observations.
+
+***
+
+
+## Final thoughts
+
+Cluster analysis, along with Multivariate Factor Analysis, are methods used to synthethise available information in a given dataset that usually contains more than 10 variables. From this preliminary analysis:
+
+
+* Most of the results - notwithstanding the outdated nature of some variables (a few dating back from 2011) - are in line with what one would expect from the relationships between Income, Energy Consumption and CO2-emissions.
+
+* A few countries have been surprisingly clustered with others e.g. across different income groups, something that seems to contradict common understanding. Given the use of MFA as the preliminary tool for dimensionality reduction, these artifacts, that by themselves deserve checking the original dataset and/or further investigations, could a priori be justified by the rebalancing nature of the MFA-methodology: no group among the afore-mentioned 3 is allowed to outweight the other 2 when it comes to define the primary components of variability in the dataset. A cluster analysis based on a standard PCA would have resulted in different clusterings, arguably more in line with common intuition.
+
+* The defined numbers of clustering is to some extent a matter of subjectivity (albeit a few criteria exists to optimally define the right ratio between inter and total inertia), and a different level of clustering would probably have made this analysis either too simplistic (loosing some interesting insigths, which this analysis has already done by only accounting for the first 2 dimensions of variability representing slightly above 50 pct. of all information in the dataset) or too detailed to easily discern common patterns between the dataset's observations.
+
+* These limitations and other warrants further study of such an interesting topic.
+
+```{r selected_region}
+Energy_comp %>%  filter(Region==params$region)
+```
+
+
+```{r selected_emissions}
+Energy_comp %>%  filter(Region==params$region) %>%  filter(CO2.emissions..tons.per.capita.>=params$emissions[1] & CO2.emissions..tons.per.capita.<=params$emissions[2])
+```
+

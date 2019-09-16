@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1568561804755.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2646818747",
+    "id" : "39D133A8",
+    "lastKnownWriteTime" : 1568613877,
+    "last_content_update" : 1568613877724,
+    "path" : "C:/101_EnergyRproject/Energy_Data.R",
+    "project_path" : "Energy_Data.R",
+    "properties" : {
+        "cursorPosition" : "1,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

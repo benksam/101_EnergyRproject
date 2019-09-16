@@ -1,0 +1,93 @@
+---
+title: "JobReportRmd_0919"
+author: "Samir"
+date: "12/09/2019"
+output:
+  html_document:
+    theme: united
+    highlight: tango
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+-----
+
+## Job Research Activities {.tabset .tabset-fade}
+
+-----
+
+
+
+> **My job research activities have to be placed under the context of the many degrees that I acquired during my university studies, my professional experiences as a teacher among others and the career path I wish to undertake for the near future**. 
+
+
+
+
+### **Priority 1: Web developer** 
+
+##### **Designing interactive Webapplications for education purposes.**
+
+----
+
+
+> Given the recent experiences in Denmark while teaching the topics I feel most comfortable with i.e. French and Geography but mostly some unfortunate frictions between me and that school's leadership as well as a few colleagues, I consider that a career path change may be legitimate given my recent studies in economics, my interest in statistical tools and the recent experience I built up in coding web applications used in teaching Geography    
+
+
+
+> **Yet developing interactive webapplications to be consumed by students would also require additional skills beyond coding in R, the statistical programming language I am familiar with.**
+
+
+> Certainly, Webapplications can be hosted by 3. parties, but for the sake of much more flexibility and for economic reasons, self-hosted solutions makes more sense in my opinion. But this requires knowledge of:
+
+
+
+> - The Linux OS and command line tools (Bash) as well as general administrative computer skills,
+> - Version control tools such as Git for code storage, sharing and automating (CI/CD flows)
+> - The containarisation of microservices, in particular tools such as Docker and Kubernetes, where different components of webapplications are made to function in clusters
+> - Many related concepts/technologies working for the same goal of deploying final webapplications to be consumed by students, among others, networking and loadbalancing, storage and log monitoring, security issues, etc.
+> - And further mastering of programming skills of Shiny Apps, Rmarkdown documents, Yaml files or the like. 
+
+
+
+Given the many job possibilities in Web-development with skills in relatively new technologies such as Kubernetes and optimal CI/CD pipelines or the like, I consider this priority an opportune one. 
+
+
+
+-----
+
+
+### **Priority 2: Teaching** 
+
+##### **French, Maths, Geography or basic IT/programming skills.**
+
+
+-----
+
+
+> As a parallel undertaking, searching for teacher jobs with subjects such as French, Maths and Geography was done, but such job positions come rarerely as full-time positions, which is why the 1st priority was laid down. In spite of this, I am open to take any teacher job in line with my competencies for the whole region of Skåne if needed, although I would expand my horizon and be ready to move anywhere in Sweden for a webdeveloper job. 
+
+
+-----
+
+
+### **Priority 3: Dataanalyst**
+
+##### **Econometrics for social sciences.**
+
+
+-----
+
+
+> A third option is to consider jobs such as research assistants in economics or dataanalysist at universities. Realistically, my age and lack of relevant experience is at odd with getting success in finding such kind of jobs. But once again, I would actually prefer to work in the field of dataanalysis since closer to my interests (statistical programming and visualizations) but my efforts so far have been to get myself ready for a webdeveloper position or a teacher position in the topics that I am competent in 
+
+ 
+
+-----
+
+
+## Tabset closed ...
